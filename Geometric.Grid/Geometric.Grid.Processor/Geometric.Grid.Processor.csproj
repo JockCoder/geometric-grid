@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Grids\" />
     <Folder Include="Shapes\Math\" />
   </ItemGroup>
 
