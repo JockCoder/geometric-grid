@@ -326,5 +326,211 @@ namespace Geometric.Grid.Processor.Test
 
         #endregion
 
+        #region ValidateGridCellPosition Tests
+
+        [TestMethod]
+        public void ValidGridCellPositionTest_Col9_Row3()
+        {
+            GridCellPosition gridPos = new GridCellPosition(9, 3);
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateGridCellPosition(gridPos));
+        }
+
+        [TestMethod]
+        public void ValidGridCellPositionBoundaryTest_Col1_Row1()
+        {
+            GridCellPosition gridPos = new GridCellPosition(1, 1);
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateGridCellPosition(gridPos));
+        }
+
+        [TestMethod]
+        public void ValidGridCellPositionBoundaryTest_Col12_Row1()
+        {
+            GridCellPosition gridPos = new GridCellPosition(12, 1);
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateGridCellPosition(gridPos));
+        }
+
+        [TestMethod]
+        public void ValidGridCellPositionBoundaryTest_Col1_Row6()
+        {
+            GridCellPosition gridPos = new GridCellPosition(1, 6);
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateGridCellPosition(gridPos));
+        }
+
+        [TestMethod]
+        public void ValidGridCellPositionBoundaryTest_Col12_Row6()
+        {
+            GridCellPosition gridPos = new GridCellPosition(12, 6);
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateGridCellPosition(gridPos));
+        }
+
+        [TestMethod]
+        public void InvalidGridCellPositionOutsideBoundaryTest_Col13_Row6()
+        {
+            GridCellPosition gridPos = new GridCellPosition(13, 6);
+
+            Assert.IsFalse(_gridShapeProcessor.ValidateGridCellPosition(gridPos));
+        }
+
+        [TestMethod]
+        public void InvalidGridCellPositionOutsideBoundaryTest_Col12_Row7()
+        {
+            GridCellPosition gridPos = new GridCellPosition(12, 7);
+
+            Assert.IsFalse(_gridShapeProcessor.ValidateGridCellPosition(gridPos));
+        }
+
+        #endregion
+
+        #region ValidateShape Tests
+
+        [TestMethod]
+        public void ValidValidateShape_Col9_Row3()
+        {
+            Triangle triangle = new Triangle(
+                        new List<XYCoordinate>() {
+                            new XYCoordinate(40, 30),
+                            new XYCoordinate(40, 20),
+                            new XYCoordinate(50, 30)
+                            }
+                        );
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+        [TestMethod]
+        public void ValidValidateShapeBoundary_Col1_Row1()
+        {
+            Triangle triangle = new Triangle(
+                        new List<XYCoordinate>() {
+                            new XYCoordinate(0, 10),
+                            new XYCoordinate(0, 0),
+                            new XYCoordinate(10, 10)
+                            }
+                        );
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+        [TestMethod]
+        public void ValidValidateShapeBoundary_Col12_Row1()
+        {
+            Triangle triangle = new Triangle(
+                        new List<XYCoordinate>() {
+                            new XYCoordinate(60, 0),
+                            new XYCoordinate(60, 10),
+                            new XYCoordinate(50, 0)
+                            }
+                        );
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+        [TestMethod]
+        public void ValidValidateShapeBoundary_Col1_Row6()
+        {
+            Triangle triangle = new Triangle(
+                        new List<XYCoordinate>() {
+                            new XYCoordinate(0, 60),
+                            new XYCoordinate(0, 50),
+                            new XYCoordinate(10, 60)
+                            }
+                        );
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+        [TestMethod]
+        public void ValidValidateShapeBoundary_Col12_Row6()
+        {
+            Triangle triangle = new Triangle(
+                        new List<XYCoordinate>() {
+                            new XYCoordinate(60, 50),
+                            new XYCoordinate(60, 60),
+                            new XYCoordinate(50, 50)
+                            }
+                        );
+
+            Assert.IsTrue(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+        [TestMethod]
+        public void InvalidValidateShapeOutsideBoundaryTest_Col13_Row6()
+        {
+            Triangle triangle = new Triangle(
+            new List<XYCoordinate>() {
+                            new XYCoordinate(60, 10),
+                            new XYCoordinate(60, 0),
+                            new XYCoordinate(70, 10)
+                }
+            );
+
+            Assert.IsFalse(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+        [TestMethod]
+        public void InvalidValidateShapeOutsideBoundaryTest_Col12_Row7()
+        {
+            Triangle triangle = new Triangle(
+            new List<XYCoordinate>() {
+                            new XYCoordinate(60, 60),
+                            new XYCoordinate(60, 70),
+                            new XYCoordinate(50, 60)
+                }
+            );
+
+            Assert.IsFalse(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+
+        [TestMethod]
+        public void InvalidValidateShapeSmallTriangleTest_Col3_Row3()
+        {
+            Triangle triangle = new Triangle(
+            new List<XYCoordinate>() {
+                            new XYCoordinate(10, 30),
+                            new XYCoordinate(10, 25),
+                            new XYCoordinate(15, 30)
+                }
+            );
+
+            Assert.IsFalse(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+
+        [TestMethod]
+        public void InvalidValidateShapeLargeTriangleTest_Col3_Row3()
+        {
+            Triangle triangle = new Triangle(
+            new List<XYCoordinate>() {
+                            new XYCoordinate(10, 30),
+                            new XYCoordinate(10, 15),
+                            new XYCoordinate(25, 30)
+                }
+            );
+
+            Assert.IsFalse(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+        [TestMethod]
+        public void InvalidValidateShapeObliqueTriangleTest_Col3_Row3()
+        {
+            Triangle triangle = new Triangle(
+            new List<XYCoordinate>() {
+                            new XYCoordinate(10, 30),
+                            new XYCoordinate(20, 20),
+                            new XYCoordinate(30, 30)
+                }
+            );
+
+            Assert.IsFalse(_gridShapeProcessor.ValidateShape(triangle));
+        }
+
+        #endregion
+
     }
 }
