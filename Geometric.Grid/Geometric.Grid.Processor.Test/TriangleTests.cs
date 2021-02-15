@@ -3,15 +3,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Geometric.Grid.Processor.Shapes.Math;
 using Geometric.Grid.Processor.Shapes.Models;
 using System.Collections.Generic;
+using Geometric.Grid.Processor.Test.TestHelpers;
 
 namespace Geometric.Grid.Processor.Test
 {
     [TestClass]
-    public class TriangleTest
+    public class TriangleTests
     {
 
         [TestMethod]
-        public void TestValidTriangleVertices()
+        public void ValidTestTriangleVertices()
         {
             XYCoordinate Vertex1 = new XYCoordinate(1, 1);
             XYCoordinate Vertex2 = new XYCoordinate(1, 2);
@@ -26,13 +27,13 @@ namespace Geometric.Grid.Processor.Test
 
             Assert.AreEqual("Triangle", triangle.Name);
             Assert.AreEqual(3, triangle.Vertices.Count);
-            Assert.AreEqual<XYCoordinate>(Vertex1, triangle.Vertices[0]);
-            Assert.AreEqual<XYCoordinate>(Vertex2, triangle.Vertices[1]);
-            Assert.AreEqual<XYCoordinate>(Vertex3, triangle.Vertices[2]);
+            Assert.IsTrue(XYCoordinateTestHelper.TestXYCoordinateValues(Vertex1, triangle.Vertices[0]));
+            Assert.IsTrue(XYCoordinateTestHelper.TestXYCoordinateValues(Vertex2, triangle.Vertices[1]));
+            Assert.IsTrue(XYCoordinateTestHelper.TestXYCoordinateValues(Vertex3, triangle.Vertices[2]));
         }
 
         [TestMethod]
-        public void TestWithNullVertices()
+        public void InvalidTestWithNullVertices()
         {
             Triangle triangle;
 
@@ -42,7 +43,7 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestWithZeroVertices()
+        public void InvalidTestWithZeroVertices()
         {
             Triangle triangle;
 
@@ -52,7 +53,7 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestWithTwoVertices()
+        public void InvalidTestWithTwoVertices()
         {
             XYCoordinate Vertex1 = new XYCoordinate(1, 1);
             XYCoordinate Vertex2 = new XYCoordinate(1, 2);
@@ -69,7 +70,7 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestWithFourVertices()
+        public void InvalidTestWithFourVertices()
         {
             XYCoordinate Vertex1 = new XYCoordinate(1, 1);
             XYCoordinate Vertex2 = new XYCoordinate(1, 2);

@@ -5,11 +5,11 @@ using System;
 namespace Geometric.Grid.Processor.Test
 {
     [TestClass]
-    public class GridCellPositionTest
+    public class GridCellPositionTests
     {
 
         [TestMethod]
-        public void TestGridProperties()
+        public void ValidTestGridProperties()
         {
             int Row = 4;
             int Column = 7;
@@ -21,10 +21,10 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestGridZero()
+        public void ValidTestGridCellOne()
         {
-            int Row = 0;
-            int Column = 0;
+            int Row = 1;
+            int Column = 1;
 
             GridCellPosition testPosition = new GridCellPosition(Column, Row);
 
@@ -33,7 +33,20 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestNegativeRow()
+        public void InvalidTestGridZero()
+        {
+            int Row = 0;
+            int Column = 0;
+
+            GridCellPosition testPosition;
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+                testPosition = new GridCellPosition(Column, Row)
+            );
+        }
+
+        [TestMethod]
+        public void InvalidTestNegativeRow()
         {
             int Row = -1;
             int Column = 7;
@@ -46,7 +59,7 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestNegativeColumn()
+        public void InvalidTestNegativeColumn()
         {
             int Row = 4;
             int Column = -1;

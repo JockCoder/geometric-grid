@@ -8,7 +8,7 @@ namespace Geometric.Grid.Processor.Interfaces
 {
     public interface IGridShapeProcessor
     {
-        Shape GetShape(GridCellPosition gridCellPosition);
+        IShape GetShape(GridCellPosition gridCellPosition);
         GridCellPosition GetGridCellPosition(Shape shape);
         bool ValidateGridCellPosition(GridCellPosition gridCellPosition);
         bool ValidateShape(Shape shape);

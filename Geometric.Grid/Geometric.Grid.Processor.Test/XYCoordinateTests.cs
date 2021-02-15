@@ -5,10 +5,10 @@ using Geometric.Grid.Processor.Shapes.Math;
 namespace Geometric.Grid.Processor.Test
 {
     [TestClass]
-    public class XYCoordinateTest
+    public class XYCoordinateTests
     {
         [TestMethod]
-        public void TestXYProperties()
+        public void ValidTestXYProperties()
         {
             int XCoord = 5;
             int YCoord = 2;
@@ -20,7 +20,7 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestXYZero()
+        public void ValidTestXYZero()
         {
             int XCoord = 0;
             int YCoord = 0;
@@ -32,7 +32,7 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestNegativeX()
+        public void InvalidTestNegativeX()
         {
             int XCoord = -1;
             int YCoord = 2;
@@ -45,7 +45,7 @@ namespace Geometric.Grid.Processor.Test
         }
 
         [TestMethod]
-        public void TestNegativeY()
+        public void InvalidTestNegativeY()
         {
             int XCoord = 5;
             int YCoord = -1;

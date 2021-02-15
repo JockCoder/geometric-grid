@@ -1,11 +1,12 @@
-﻿using Geometric.Grid.Processor.Shapes.Math;
+﻿using Geometric.Grid.Processor.Interfaces;
+using Geometric.Grid.Processor.Shapes.Math;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Geometric.Grid.Processor.Shapes.Models
 {
-    public class Polygon: Shape
+    public class Polygon: Shape, IPolygon
     {
         public List<XYCoordinate> Vertices { get; }
 
