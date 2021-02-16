@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Geometric.Grid.Processor.Shapes.Math
+namespace Geometric.Grid.Processor.Positioning
 {
     public class XYCoordinate
     {

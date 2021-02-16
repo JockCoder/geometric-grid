@@ -1,4 +1,4 @@
-﻿using Geometric.Grid.Processor.Shapes.Math;
+﻿using Geometric.Grid.Processor.Positioning;
 using Geometric.Grid.Processor.Interfaces;
 using System;
 using System.Collections.Generic;

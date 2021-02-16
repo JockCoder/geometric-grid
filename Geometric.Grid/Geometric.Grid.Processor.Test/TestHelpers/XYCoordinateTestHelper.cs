@@ -1,4 +1,4 @@
-﻿using Geometric.Grid.Processor.Shapes.Math;
+﻿using Geometric.Grid.Processor.Positioning;
 
 namespace Geometric.Grid.Processor.Test.TestHelpers
 {

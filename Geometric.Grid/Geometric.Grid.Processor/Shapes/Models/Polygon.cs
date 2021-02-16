@@ -1,5 +1,5 @@
 ﻿using Geometric.Grid.Processor.Interfaces;
-using Geometric.Grid.Processor.Shapes.Math;
+using Geometric.Grid.Processor.Positioning;
 using System;
 using System.Collections.Generic;
 using System.Text;

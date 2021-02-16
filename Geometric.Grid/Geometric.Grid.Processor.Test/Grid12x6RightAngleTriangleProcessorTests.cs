@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Geometric.Grid.Processor.Interfaces;
 using Geometric.Grid.Processor.Grids;
-using Geometric.Grid.Processor.Shapes.Math;
+using Geometric.Grid.Processor.Positioning;
 using Geometric.Grid.Processor.Shapes.Models;
 using System.Collections.Generic;
 using System;
