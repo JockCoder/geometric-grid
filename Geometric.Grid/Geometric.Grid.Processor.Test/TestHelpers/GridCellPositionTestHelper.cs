@@ -1,7 +1,4 @@
-﻿using Geometric.Grid.Processor.Grids;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Geometric.Grid.Processor.Positioning;
 
 namespace Geometric.Grid.Processor.Test.TestHelpers
 {

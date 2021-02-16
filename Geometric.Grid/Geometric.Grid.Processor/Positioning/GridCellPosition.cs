@@ -1,4 +1,4 @@
-﻿namespace Geometric.Grid.Processor.Grids
+﻿namespace Geometric.Grid.Processor.Positioning
 {
     public class GridCellPosition
     {

@@ -1,8 +1,4 @@
-﻿using Geometric.Grid.Processor.Grids;
-using Geometric.Grid.Processor.Shapes.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Geometric.Grid.Processor.Positioning;
 
 namespace Geometric.Grid.Processor.Interfaces
 {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Geometric.Grid.Processor.Grids;
 using System;
+
+using Geometric.Grid.Processor.Positioning;
 
 namespace Geometric.Grid.Processor.Test
 {

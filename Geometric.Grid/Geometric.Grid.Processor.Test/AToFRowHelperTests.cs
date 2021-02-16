@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+
 using Geometric.Grid.Processor.Interfaces;
 using Geometric.Grid.Processor.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Geometric.Grid.Processor.Test
 {

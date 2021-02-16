@@ -1,10 +1,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System;
+
 using Geometric.Grid.Processor.Interfaces;
 using Geometric.Grid.Processor.Grids;
 using Geometric.Grid.Processor.Positioning;
 using Geometric.Grid.Processor.Shapes.Models;
-using System.Collections.Generic;
-using System;
+
 using Geometric.Grid.Processor.Test.TestHelpers;
 
 namespace Geometric.Grid.Processor.Test
