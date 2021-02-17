@@ -6,17 +6,45 @@ using Geometric.Grid.Processor.Interfaces;
 
 namespace Geometric.Grid.Processor.Positioning
 {
-    public class GridCellTranslator : IGridCellPositionConvertor
+    public class GridCellTranslator: IGridCellPositionConvertor
     {
         public string Row { get; set; }
         public int Column { get; set; }
 
-        public int GetColumn()
+        /// <summary>
+        /// Use this to set to the mapping values
+        /// which may be numeric or other.
+        /// </summary>
+        /// <param name="numericRow"></param>
+        /// <param name="numericColumn"></param>
+        public void SetGridMappedValues(int numericRow, int numericColumn)
+        {
+            Column = numericColumn;
+            Row = SetMappedRow(numericRow);
+        }
+
+        private string SetMappedRow(int numericRow)
+        {
+            switch (numericRow)
+            {
+                case 1: return "A";
+                case 2: return "B";
+                case 3: return "C";
+                case 4: return "D";
+                case 5: return "E";
+                case 6: return "F";
+            }
+
+            //we got here, so not a valid value
+            throw new ArgumentOutOfRangeException();
+        }
+
+        public int GetNumericColumn()
         {
             return Column;
         }
 
-        public int GetRow()
+        public int GetNumericRow()
         {
             if (Row.Length > 1)
             {

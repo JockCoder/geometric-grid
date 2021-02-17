@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
+using Geometric.Grid.Processor.Interfaces;
 using Geometric.Grid.Processor.Shapes.Models;
 using Geometric.Grid.Processor.Positioning;
+using Geometric.Grid.Processor.Grids;
+
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,41 +18,52 @@ namespace Geometric.Grid.Api.Controllers
     [ApiController]
     public class TriangleController : ControllerBase
     {
+        private readonly ILogger<TriangleController> _logger;
+
+        public TriangleController(ILogger<TriangleController> logger)
+        {
+            _logger = logger;
+        }
+
+
         // GET: api/<TriangleController>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Triangle))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Get([FromQuery] GridCellTranslator gridLocation)
         {
-            //return new string[] { "value1", "value2" };
+            IGridShapeProcessor processor = new Grid12x6RightAngleTriangleProcessor();
 
-            XYCoordinate Vertex1 = new XYCoordinate(1, 1);
-            XYCoordinate Vertex2 = new XYCoordinate(1, 2);
-            XYCoordinate Vertex3 = new XYCoordinate(2, 1);
+            try
+            {
+                //First Convert from the mapped valudes to actual numer grid values
+                GridCellPosition position = new GridCellPosition(gridLocation.GetNumericColumn(), 
+                                                                 gridLocation.GetNumericRow());
 
-            Triangle triangle =  new Triangle(
-                new List<XYCoordinate>() {
-                    Vertex1,
-                    Vertex2,
-                    Vertex3 }
-                );
+                //Check that the position is valid
+                if(processor.ValidateGridCellPosition(position))
+                {
+                    //Yep, all's Ok
+                    IShape triangle = processor.GetShape(position);
+                    return Ok(triangle);
+                }
+                else
+                {
+                    //Not found
+                    return NotFound();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                //log something here
+                _logger.LogError(ex.Message);
+            }
 
-            //return Ok(triangle);
-
-            //return Ok();
-
-            string ret = string.Format("Row = {0}, Col = {1}, nRow = {2}, nColumn = {3}",
-                gridLocation.Row, gridLocation.Column, gridLocation.GetRow(), gridLocation.GetColumn());
-
-            return Ok(ret);
-
-            //return Ok(gridLocation);
+            //Something has gone wrong.
+            return BadRequest();
         }
 
-        // GET api/<TriangleController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<TriangleController>
         [HttpPost]
@@ -63,10 +77,5 @@ namespace Geometric.Grid.Api.Controllers
         {
         }
 
-        // DELETE api/<TriangleController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
