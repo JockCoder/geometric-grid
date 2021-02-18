@@ -6,7 +6,7 @@ using Geometric.Grid.Processor.Interfaces;
 
 namespace Geometric.Grid.Processor.Positioning
 {
-    public class GridCellTranslator: IGridCellPositionConvertor
+    public class GridCellMapper: IGridCellMapper
     {
         public string Row { get; set; }
         public int Column { get; set; }
@@ -39,6 +39,12 @@ namespace Geometric.Grid.Processor.Positioning
             throw new ArgumentOutOfRangeException();
         }
 
+
+        /// <summary>
+        /// These methods should convert from mapping values
+        /// to a numeric grid
+        /// </summary>
+        /// <returns></returns>
         public int GetNumericColumn()
         {
             return Column;

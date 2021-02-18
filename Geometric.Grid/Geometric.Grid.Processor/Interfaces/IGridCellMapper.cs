@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Geometric.Grid.Processor.Interfaces
 {
-    public interface IGridCellPositionConvertor
+    public interface IGridCellMapper
     {
         /// <summary>
         /// Use this to set to the mapping values

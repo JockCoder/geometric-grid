@@ -31,15 +31,15 @@ namespace Geometric.Grid.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Triangle))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Get([FromQuery] GridCellTranslator gridLocation)
+        public IActionResult Get([FromQuery] GridCellMapper gridMapper)
         {
             IGridShapeProcessor processor = new Grid12x6RightAngleTriangleProcessor();
 
             try
             {
                 //First Convert from the mapped valudes to actual numer grid values
-                GridCellPosition position = new GridCellPosition(gridLocation.GetNumericColumn(), 
-                                                                 gridLocation.GetNumericRow());
+                GridCellPosition position = new GridCellPosition(gridMapper.GetNumericColumn(), 
+                                                                 gridMapper.GetNumericRow());
 
                 //Check that the position is valid
                 if(processor.ValidateGridCellPosition(position))
@@ -68,7 +68,7 @@ namespace Geometric.Grid.Api.Controllers
 
         // POST api/<TriangleController>
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(GridCellTranslator))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(GridCellMapper))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Post([FromBody] Triangle triangle)
@@ -83,11 +83,11 @@ namespace Geometric.Grid.Api.Controllers
                     //Yep, all's Ok
                     GridCellPosition position = processor.GetGridCellPosition(triangle);
 
-                    GridCellTranslator gridtranslator = new GridCellTranslator();
+                    GridCellMapper gridMapper = new GridCellMapper();
 
-                    gridtranslator.SetGridMappedValues(position.Row, position.Column);
+                    gridMapper.SetGridMappedValues(position.Row, position.Column);
 
-                    return Created(Request.Path.ToString(), gridtranslator);
+                    return Created(Request.Path.ToString(), gridMapper);
                 }
                 else
                 {
