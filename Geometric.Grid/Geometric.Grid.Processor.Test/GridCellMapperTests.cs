@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Geometric.Grid.Processor.Positioning;
 using System;
-using System.Collections.Generic;
-using System.Text;
+
+using Geometric.Grid.Processor.Positioning;
+
 
 namespace Geometric.Grid.Processor.Test
 {

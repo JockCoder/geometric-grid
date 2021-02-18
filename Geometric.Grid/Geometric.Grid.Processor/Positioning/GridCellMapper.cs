@@ -1,11 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Geometric.Grid.Processor.Interfaces;
 
 namespace Geometric.Grid.Processor.Positioning
 {
+    /// <summary>
+    /// This class is a mapper for a grid coordinate system using
+    /// Alpha (A-B) for Row and Numerics for columns.
+    /// It can map to a pure numeric grid and back to the original
+    /// mapping system.
+    /// 
+    /// This is specific for a Grid A-F and Columns 1-12
+    /// The properties in this are also used for the serialization in the API.
+    /// 
+    /// Improvement:
+    /// I'd perhaps make the Mapper into an interface going forward, and seperate
+    /// the properties into their own DTO.
+    /// </summary>
     public class GridCellMapper
     {
         public string Row { get; set; }

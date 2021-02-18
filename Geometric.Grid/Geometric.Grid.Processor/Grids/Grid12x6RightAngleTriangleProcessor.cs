@@ -20,6 +20,8 @@ namespace Geometric.Grid.Processor.Grids
     /// The Grid is 60 pixels in length and height
     /// Each leg (non-hypotenuese) of the triangle is 10 pixels.
     /// -
+    /// Implements the IGridShapeProcessor, although could really be
+    /// implemented as a static class as it has no state.
     /// </summary>
     public class Grid12x6RightAngleTriangleProcessor : IGridShapeProcessor
     {
@@ -39,6 +41,11 @@ namespace Geometric.Grid.Processor.Grids
 
         #region IGridShapeProcessor Methods
 
+        /// <summary>
+        /// Get the shape for the grid position given
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns></returns>
         public GridCellPosition GetGridCellPosition(IShape shape)
         {
             if(!ValidateShape(shape))
@@ -49,6 +56,11 @@ namespace Geometric.Grid.Processor.Grids
             return GetGridPositionFromShape(shape);
         }
 
+        /// <summary>
+        /// For a given shape, get the grid position it's in
+        /// </summary>
+        /// <param name="gridCellPosition"></param>
+        /// <returns></returns>
         public IShape GetShape(GridCellPosition gridCellPosition)
         {
             if(!ValidateGridCellPosition(gridCellPosition))
@@ -59,6 +71,11 @@ namespace Geometric.Grid.Processor.Grids
             return GetTriangleFromPosition(gridCellPosition);
         }
 
+        /// <summary>
+        /// Validate the Grid Position Provided
+        /// </summary>
+        /// <param name="gridCellPosition"></param>
+        /// <returns>true if the grid is valid</returns>
         public bool ValidateGridCellPosition(GridCellPosition gridCellPosition)
         {
             if(gridCellPosition.Column <  MIN_COLUMN_LENGTH ||
@@ -72,6 +89,11 @@ namespace Geometric.Grid.Processor.Grids
             return true;
         }
 
+        /// <summary>
+        /// Validate the shape
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns>true if a valid triangle</returns>
         public bool ValidateShape(IShape shape)
         {
             Triangle triangle = (Triangle)shape;

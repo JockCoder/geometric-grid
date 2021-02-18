@@ -84,9 +84,8 @@ namespace Geometric.Grid.Api.Controllers
                     //Yep, all's Ok
                     GridCellPosition position = _shapeProcessor.GetGridCellPosition(triangle);
 
-                    GridCellMapper gridMapper = new GridCellMapper();
-
                     //Convert from numeric grid, to mapped grid values
+                    GridCellMapper gridMapper = new GridCellMapper();
                     gridMapper.SetGridMappedValues(position.Row, position.Column);
 
                     return Created(Request.Path.ToString(), gridMapper);
