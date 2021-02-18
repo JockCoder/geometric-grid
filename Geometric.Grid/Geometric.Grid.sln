@@ -5,9 +5,15 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geometric.Grid.Api", "Geometric.Grid.Api\Geometric.Grid.Api.csproj", "{78BD2FCA-2113-4148-9FA0-1CBE48E4245F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometric.Grid.Processor", "Geometric.Grid.Processor\Geometric.Grid.Processor.csproj", "{BB3F57A7-2000-48F7-9819-5D1715AA61DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geometric.Grid.Processor", "Geometric.Grid.Processor\Geometric.Grid.Processor.csproj", "{BB3F57A7-2000-48F7-9819-5D1715AA61DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometric.Grid.Processor.Test", "Geometric.Grid.Processor.Test\Geometric.Grid.Processor.Test.csproj", "{CA1A797A-ADE5-464F-A94C-010431FC2409}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geometric.Grid.Processor.Test", "Geometric.Grid.Processor.Test\Geometric.Grid.Processor.Test.csproj", "{CA1A797A-ADE5-464F-A94C-010431FC2409}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{7795C15E-546B-4588-BF89-6F5F264B0BCE}"
+	ProjectSection(SolutionItems) = preProject
+		Postman\Geometric Grid API Exercise.postman_collection.json = Postman\Geometric Grid API Exercise.postman_collection.json
+		Postman\GridTestEnvironment.postman_environment.json = Postman\GridTestEnvironment.postman_environment.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
