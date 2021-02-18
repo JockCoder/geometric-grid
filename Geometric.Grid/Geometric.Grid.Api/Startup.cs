@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Geometric.Grid.Processor.Interfaces;
+using Geometric.Grid.Processor.Grids;
+
 namespace Geometric.Grid.Api
 {
     public class Startup
@@ -26,6 +29,7 @@ namespace Geometric.Grid.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
+            services.AddScoped<IGridShapeProcessor, Grid12x6RightAngleTriangleProcessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

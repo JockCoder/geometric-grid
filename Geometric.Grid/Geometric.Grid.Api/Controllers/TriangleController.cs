@@ -6,8 +6,6 @@ using System;
 using Geometric.Grid.Processor.Interfaces;
 using Geometric.Grid.Processor.Shapes.Models;
 using Geometric.Grid.Processor.Positioning;
-using Geometric.Grid.Processor.Grids;
-
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,10 +17,12 @@ namespace Geometric.Grid.Api.Controllers
     public class TriangleController : ControllerBase
     {
         private readonly ILogger<TriangleController> _logger;
+        private readonly IGridShapeProcessor _shapeProcessor;
 
-        public TriangleController(ILogger<TriangleController> logger)
+        public TriangleController(ILogger<TriangleController> logger, IGridShapeProcessor gridShapeProcessor)
         {
             _logger = logger;
+            _shapeProcessor = gridShapeProcessor;
         }
 
 
@@ -33,19 +33,17 @@ namespace Geometric.Grid.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Get([FromQuery] GridCellMapper gridMapper)
         {
-            IGridShapeProcessor processor = new Grid12x6RightAngleTriangleProcessor();
-
             try
             {
-                //First Convert from the mapped valudes to actual numer grid values
+                //First Convert from the mapped valudes to actual numeric grid values
                 GridCellPosition position = new GridCellPosition(gridMapper.GetNumericColumn(), 
                                                                  gridMapper.GetNumericRow());
 
                 //Check that the position is valid
-                if(processor.ValidateGridCellPosition(position))
+                if(_shapeProcessor.ValidateGridCellPosition(position))
                 {
-                    //Yep, all's Ok
-                    IShape triangle = processor.GetShape(position);
+                    //Yep, all's Ok - go get the shape
+                    IShape triangle = _shapeProcessor.GetShape(position);
                     return Ok(triangle);
                 }
                 else
@@ -55,9 +53,14 @@ namespace Geometric.Grid.Api.Controllers
                 }
                 
             }
+            catch(ArgumentOutOfRangeException ex)
+            {
+                //Out of range - means not found
+                _logger.LogError(ex.Message);
+                return NotFound();
+            }
             catch (Exception ex)
             {
-                //log something here
                 _logger.LogError(ex.Message);
             }
 
@@ -73,18 +76,17 @@ namespace Geometric.Grid.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Post([FromBody] Triangle triangle)
         {
-            IGridShapeProcessor processor = new Grid12x6RightAngleTriangleProcessor();
-
             try
             {
                 //Check that the triangle is valid
-                if (processor.ValidateShape(triangle))
+                if (_shapeProcessor.ValidateShape(triangle))
                 {
                     //Yep, all's Ok
-                    GridCellPosition position = processor.GetGridCellPosition(triangle);
+                    GridCellPosition position = _shapeProcessor.GetGridCellPosition(triangle);
 
                     GridCellMapper gridMapper = new GridCellMapper();
 
+                    //Convert from numeric grid, to mapped grid values
                     gridMapper.SetGridMappedValues(position.Row, position.Column);
 
                     return Created(Request.Path.ToString(), gridMapper);
@@ -96,9 +98,14 @@ namespace Geometric.Grid.Api.Controllers
                 }
 
             }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                //Out of range - means not found
+                _logger.LogError(ex.Message);
+                return NotFound();
+            }
             catch (Exception ex)
             {
-                //log something here
                 _logger.LogError(ex.Message);
             }
 
