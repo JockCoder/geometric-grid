@@ -30,6 +30,7 @@ namespace Geometric.Grid.Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Triangle))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Get([FromQuery] GridCellTranslator gridLocation)
         {
             IGridShapeProcessor processor = new Grid12x6RightAngleTriangleProcessor();
@@ -67,15 +68,44 @@ namespace Geometric.Grid.Api.Controllers
 
         // POST api/<TriangleController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(GridCellTranslator))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Post([FromBody] Triangle triangle)
         {
+            IGridShapeProcessor processor = new Grid12x6RightAngleTriangleProcessor();
+
+            try
+            {
+                //Check that the triangle is valid
+                if (processor.ValidateShape(triangle))
+                {
+                    //Yep, all's Ok
+                    GridCellPosition position = processor.GetGridCellPosition(triangle);
+
+                    GridCellTranslator gridtranslator = new GridCellTranslator();
+
+                    gridtranslator.SetGridMappedValues(position.Row, position.Column);
+
+                    return Created(Request.Path.ToString(), gridtranslator);
+                }
+                else
+                {
+                    //Not found
+                    return NotFound();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //log something here
+                _logger.LogError(ex.Message);
+            }
+
+            //Something has gone wrong.
+            return BadRequest();
         }
 
-        // PUT api/<TriangleController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
     }
 }
